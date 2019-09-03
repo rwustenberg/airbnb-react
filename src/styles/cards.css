@@ -12,6 +12,7 @@ a.card {
 .card .logo {
 	width: 100px;
 	height: 34px;
+	background-Image: url('../images/logo-airbnb.png');
 	background-position: center;
 	background-repeat: no-repeat;
 	background-position: center;
