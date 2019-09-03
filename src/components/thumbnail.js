@@ -1,5 +1,7 @@
 import React from 'react'
 import '../styles/cards.css'
+import {Link} from 'react-router-dom'
+
 
 
 
@@ -48,7 +50,7 @@ class Thumbnail extends React.Component {
 	render () {
 		return(
 			<div className="card">
-			<a className="card link" href="place.html">
+			<Link className="card link" to="place.html">
 				<div className="image" style={{backgroundImage: 'url(https://q-ak.bstatic.com/images/hotel/max1024x768/186/186223203.jpg)'}}>
 					<button className="icon">
 						<i className="far fa-heart"></i>
@@ -79,7 +81,7 @@ class Thumbnail extends React.Component {
 				</div>)
 				})
 			}
-		</a>
+		</Link>
 		</div>
 		)
 	}

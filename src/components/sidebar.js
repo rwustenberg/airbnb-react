@@ -4,6 +4,9 @@ import '../styles/sidebar.css'
 
 
 class Sidebar extends React.Component {
+	state = {
+		
+	}
 	render () {
 		return(
 		<div className="grid medium">

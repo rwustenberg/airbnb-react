@@ -4,9 +4,10 @@ import Thumbnail from './components/thumbnail';
 import Nav from './components/nav';
 import Sidebar from './components/sidebar';
 import Form from './components/form';
+import Router from './components/route';
 
 
-ReactDOM.render(<Nav />, document.getElementById('root'));
+ReactDOM.render(<Router />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

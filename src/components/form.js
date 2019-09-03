@@ -1,7 +1,11 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 import '../styles/forms.css'
 
 class Form extends React.Component {
+	state = {
+		
+	}
 	render () {
 		return (
 			<div className="grid center middle tall image">
@@ -11,19 +15,19 @@ class Form extends React.Component {
 						<form>
 							<div className="group">
 								<label>Name</label>
-								<input type="text">
+								<input type="text" />
 							</div>
 							<div className="group">
 								<label>Email</label>
-								<input type="email">
+								<input type="email" />
 							</div>
 							<div className="group">
 								<label>Password</label>
-								<input type="password">
+								<input type="password"/>
 							</div>
-							<div class=Name"group">
+							<div className="group">
 								<label>Location</label>
-								<input type="text">
+								<input type="text" />
 							</div>
 							<div className="group">
 								<label>Profile Picture</label>
@@ -32,11 +36,11 @@ class Form extends React.Component {
 							<button className="primary">Signup</button>
 						</form>
 						<p class="footer">
-							Already have an account? <a href="">Login</a>
+							Already have an account? <Link to="">Login</Link>
 						</p>
 					</div>
 				</div>
-			</div>Name
+			</div>
 		)
 	}
 }
