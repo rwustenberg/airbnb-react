@@ -5,8 +5,8 @@ class Router extends React.Component {
 	render () {
 		return (
 			<BrowserRouter>
-				<switch>
-				</switch>
+				<Switch>
+				</Switch>
 			</BrowserRouter>
 		)
 	}

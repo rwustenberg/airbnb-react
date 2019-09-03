@@ -11,7 +11,7 @@ class Nav extends React.Component {
 		<nav>
 			<Link to="/" className="logo" style={{backgroundImage: 'url(images/logo-airbnb.png)'}}></Link>
 			<div className="profile">
-				<Link to="/" className="button">
+				<Link to="profile.html" className="button">
 					<div className="avatar" style={{backgroundImage: 'url(https://randomuser.me/api/portraits/men/9.jpg)'}}></div>
 					<span>Tony</span>
 				</Link>
