@@ -1,6 +1,7 @@
 import React from "react";
 import Nav from "./nav";
 import axios from "axios";
+import moment from "moment";
 
 class Place extends React.Component {
   state = {
@@ -14,7 +15,7 @@ class Place extends React.Component {
         name: ""
       },
       rating: 0,
-      reviews: []
+      reviews: [{ author: "", date: "" }]
     },
     images: [
       "https://q-ak.bstatic.com/images/hotel/max1024x768/186/186223203.jpg",
@@ -118,7 +119,7 @@ class Place extends React.Component {
                 ></div>
                 <div className="name">
                   <small>Hosted by</small>
-                  <span>Kitty</span>
+                  <span>{this.state.place.host.name}</span>
                 </div>
               </div>
               <div className="card specs">
@@ -142,7 +143,7 @@ class Place extends React.Component {
                   </ul>
                 </div>
               </div>
-              <p>{this.state.place.reviews}</p>
+              <p>{this.state.place.description}</p>
               <h3>Amenities</h3>
               <div className="card specs">
                 <div className="content">
@@ -172,7 +173,7 @@ class Place extends React.Component {
                 </div>
               </div>
               <div className="reviews">
-                <h2>4 Reviews</h2>
+                <h2>{this.state.place.reviews.length} Reviews</h2>
                 <form>
                   <div className="group">
                     <label>Leave a review</label>
@@ -197,106 +198,55 @@ class Place extends React.Component {
                             "https://randomuser.me/api/portraits/women/3.jpg)"
                         }}
                       ></div>
-                      <div className="name">
-                        <small>27 July 2019</small>
-                        <span>Amanda</span>
+                    </div>
+                    <div className="card review">
+                      <div className="content">
+                        <div className="user">
+                          <div
+                            className="avatar"
+                            style={{
+                              backgroundImage:
+                                "https://randomuser.me/api/portraits/men/5.jpg)"
+                            }}
+                          ></div>
+                          <div className="name">
+                            <small>
+                              {moment(this.state.place.reviews.date).format(
+                                "DD MMM YYYY "
+                              )}
+                            </small>
+                            <span>{this.state.place.host.name}</span>
+                          </div>
+                        </div>
+                        <div className="rating">
+                          <i className="fas fa-star"></i>
+                          <i className="fas fa-star"></i>
+                          <i className="fas fa-star"></i>
+                          <i className="fas fa-star"></i>
+                          <i className="far fa-star"></i>
+                        </div>
+                        <p>We had a wonderful stay!</p>
                       </div>
                     </div>
-                    <div className="rating">
-                      <i className="fas fa-star"></i>
-                      <i className="fas fa-star"></i>
-                      <i className="fas fa-star"></i>
-                      <i className="fas fa-star"></i>
-                      <i className="fas fa-star"></i>
-                    </div>
-                    <p>
-                      It was beyond my imagination that my AirBnB experience
-                      could be better than a 5 star resort hotel. It is one of
-                      the most beautiful villa that I have had stayed so far in
-                      the many countries travelled so far. The pictures have not
-                      sufficiently described the details of the place.
-                    </p>
-                  </div>
-                </div>
-                <div className="card review">
-                  <div className="content">
-                    <div className="user">
-                      <div
-                        className="avatar"
-                        style={{
-                          backgroundImage:
-                            "https://randomuser.me/api/portraits/men/4.jpg)"
-                        }}
-                      ></div>
-                      <div className="name">
-                        <small>22 July 2019</small>
-                        <span>John</span>
-                      </div>
-                    </div>
-                    <div className="rating">
-                      <i className="fas fa-star"></i>
-                      <i className="fas fa-star"></i>
-                      <i className="fas fa-star"></i>
-                      <i className="far fa-star"></i>
-                      <i className="far fa-star"></i>
-                    </div>
-                    <p>
-                      It was beyond my imagination that my AirBnB experience
-                      could be better than a 5 star resort hotel. It is one of
-                      the most beautiful villa that I have had stayed so far in
-                      the many countries travelled so far. The pictures have not
-                      sufficiently described the details of the place.
-                    </p>
-                  </div>
-                </div>
-                <div className="card review">
-                  <div className="content">
-                    <div className="user">
-                      <div
-                        className="avatar"
-                        style={{
-                          backgroundImage:
-                            "https://randomuser.me/api/portraits/men/5.jpg)"
-                        }}
-                      >
-                        >
+                    <div className="card review">
+                      <div className="content">
+                        <div className="user">
+                          <div
+                            className="avatar"
+                            style={{
+                              backgroundImage:
+                                "https://randomuser.me/api/portraits/women/7.jpg)"
+                            }}
+                          ></div>
+                        </div>
                       </div>
                       <div className="name">
-                        <small>4 July 2019</small>
-                        <span>Sam</span>
-                      </div>
-                    </div>
-                    <div className="rating">
-                      <i className="fas fa-star"></i>
-                      <i className="fas fa-star"></i>
-                      <i className="fas fa-star"></i>
-                      <i className="fas fa-star"></i>
-                      <i className="far fa-star"></i>
-                    </div>
-                    <p>
-                      It was beyond my imagination that my AirBnB experience
-                      could be better than a 5 star resort hotel. It is one of
-                      the most beautiful villa that I have had stayed so far in
-                      the many countries travelled so far. The pictures have not
-                      sufficiently described the details of the place.
-                    </p>
-                  </div>
-                </div>
-                <div className="card review">
-                  <div className="content">
-                    <div className="user">
-                      <div
-                        className="avatar"
-                        style={{
-                          backgroundImage:
-                            "https://randomuser.me/api/portraits/women/7.jpg)"
-                        }}
-                      >
-                        >
-                      </div>
-                      <div className="name">
-                        <small>27 May 2019</small>
-                        <span>Ella</span>
+                        <small>
+                          {moment(this.state.place.reviews.date).format(
+                            "DD MMM YYYY "
+                          )}
+                        </small>
+                        <span>Kitty</span>
                       </div>
                     </div>
                     <div className="rating">
