@@ -2,6 +2,8 @@ import React from "react";
 import Nav from "./nav";
 import axios from "axios";
 import moment from "moment";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 class Place extends React.Component {
   state = {
@@ -15,7 +17,8 @@ class Place extends React.Component {
         name: ""
       },
       rating: 0,
-      reviews: [{ author: "", date: "" }]
+      reviews: [{ author: "", date: "" }],
+      image: []
     },
     images: [
       "https://q-ak.bstatic.com/images/hotel/max1024x768/186/186223203.jpg",
@@ -30,7 +33,15 @@ class Place extends React.Component {
       "https://q-ak.bstatic.com/images/hotel/max1280x900/186/186223199.jpg"
     ],
     selectedImage: "",
-    searchTerm: ""
+    searchTerm: "",
+    bookingStartDate: "",
+    bookingEndDate: ""
+  };
+  handleChange = date => {
+    this.setState({ bookingStartDate: date });
+  };
+  dateChange = date => {
+    this.setState({ bookingEndDate: date });
   };
 
   toggleLike = e => {
@@ -60,9 +71,17 @@ class Place extends React.Component {
       selectedImage: this.state.images[i]
     });
   };
+  gotoPlacePage = e => {
+    e.preventDefault();
+    this.props.history.push({
+      pathname: `/place/id`,
+      name: "Name"
+    });
+  };
+
   componentWillMount() {
     axios
-      .get("http://localhost:4000/places/5d75d0f38df2f1759bcaa4ae")
+      .get(`http://localhost:4000/place/${this.props.match.params.id}`)
       .then(res => {
         console.log(res.data);
         this.setState({
@@ -285,8 +304,16 @@ class Place extends React.Component {
                   <form className="small">
                     <div className="group">
                       <label>Dates</label>
-                      <input type="text" placeholder="Check-in" />
-                      <input type="text" placeholder="Check-out" />
+                      <DatePicker
+                        placeholder="Check-in"
+                        selected={this.state.bookingStartDate}
+                        onChange={this.handleChange}
+                      />
+                      <DatePicker
+                        placeholder="Check-out"
+                        selected={this.state.bookingEndDate}
+                        onChange={this.dateChange}
+                      />
                     </div>
                     <div className="group">
                       <label>Guests</label>
