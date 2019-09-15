@@ -34,8 +34,10 @@ class Place extends React.Component {
     ],
     selectedImage: "",
     searchTerm: "",
-    bookingStartDate: "",
-    bookingEndDate: ""
+    dates: {
+      bookingStartDate: "",
+      bookingEndDate: ""
+    }
   };
   handleChange = date => {
     this.setState({ bookingStartDate: date });
@@ -43,6 +45,9 @@ class Place extends React.Component {
   dateChange = date => {
     this.setState({ bookingEndDate: date });
   };
+  // let btnIsDisabled = () => {if(bookingStartDate === false || bookingEndDate === false)
+  // 	return btnIsDisabled},
+  // 	this.setState({btnIsDisabled})
 
   toggleLike = e => {
     let newPlaces = this.state.places.map(p => {
@@ -328,7 +333,16 @@ class Place extends React.Component {
                       </select>
                     </div>
                     <div className="group">
-                      <button className="secondary full">
+                      <button
+                        className="secondary full"
+                        onSubmit={this.props.history.push({
+                          pathname: `/confirm`,
+                          bookingStartDate: this.state.bookingStartDate,
+                          bookingEndDate: this.state.bookingEndDate,
+                          guests: this.state.guests,
+                          place: this.state.place
+                        })}
+                      >
                         Book this place
                       </button>
                     </div>

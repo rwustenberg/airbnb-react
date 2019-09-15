@@ -1,49 +1,91 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
-
+import React from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
 class Signup extends React.Component {
-	state = {
+  state = {
+    user: {
+      name: "",
+      email: "",
+      password: "",
+      location: ""
+    }
+  };
+  signup = e => {
+    e.preventDefault();
+    axios
+      .post("http://localhost4000/signup", this.state.user)
+      .then(res => {
+        localStorage.setItem("token", res.data);
+        this.props.history.push({
+          pathname: `/`
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
 
-	}
-	render () {
-		return (
-			<div className="grid center middle tall image">
-				<div className="card small">
-					<div className="content">
-					<div className="logo"></div>
-						<form>
-							<div className="group">
-								<label>Name</label>
-								<input type="text"/>
-							</div>
-							<div className="group">
-								<label>Email</label>
-								<input type="email"/>
-							</div>
-							<div className="group">
-								<label>Password</label>
-								<input type="password"/>
-							</div>
-							<div className="group">
-								<label>Location</label>
-								<input type="text"/>
-							</div>
-							<div className="group">
-								<label>Profile Picture</label>
-								<input type="file" />
-							</div>
-							<button className="primary">Signup</button>
-						</form>Name
-						<p clasNames="footer">
-							Already have an account? <Link to="/login"> Login </Link>
-						</p>
-					</div>
-				</div>
-			</div>
+  changeField = (e, field) => {
+    let user = this.state.user;
+    user[field] = e.target.value;
+    this.setState({ user });
+  };
 
-		)
-	}
+  render() {
+    return (
+      <div className="grid center middle tall image">
+        <div className="card small">
+          <div className="content">
+            <div className="logo"></div>
+            <form onSubmit={this.signup}>
+              <div className="group">
+                <label>Name</label>
+                <input
+                  type="text"
+                  value={this.state.user.name}
+                  onChange={e => this.changeField(e, "name")}
+                />
+              </div>
+              <div className="group">
+                <label>Email</label>
+                <input
+                  type="email"
+                  value={this.state.user.email}
+                  onChange={e => this.changeField(e, "email")}
+                />
+              </div>
+              <div className="group">
+                <label>Password</label>
+                <input
+                  type="password"
+                  value={this.state.user.password}
+                  onChange={e => this.changeField(e, "password")}
+                />
+              </div>
+              <div className="group">
+                <label>Location</label>
+                <input
+                  type="text"
+                  value={this.state.user.location}
+                  onChange={e => this.changeField(e, "location")}
+                />
+              </div>
+              <div className="group">
+                <label>Profile Picture</label>
+                <input type="file" />
+              </div>
+              <button className="primary">Signup</button>
+            </form>
+            Name
+            <p clasNames="footer">
+              Already have an account? <Link to="/login"> Login </Link>
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default Signup;

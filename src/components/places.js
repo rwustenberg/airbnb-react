@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import Thumbnail from "./thumbnail";
 import Nav from "./nav";
 
@@ -61,7 +62,9 @@ class Places extends React.Component {
         </div>
         <div className="grid five large">
           {this.state.places.map((place, index) => (
-            <Thumbnail place={place} key={index} />
+            <Link className="card link" key={index} to={`/Place/${place._id}`}>
+              <Thumbnail place={place} />
+            </Link>
           ))}
         </div>
       </>

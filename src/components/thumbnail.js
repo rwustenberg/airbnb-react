@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 class Thumbnail extends React.Component {
   state = {
-    thumbnail: {
+    place: {
       image:
         "https://q-ak.bstatic.com/images/hotel/max1024x768/186/186223203.jpg",
       title: "Luxury Villa Indu Siam",
@@ -14,13 +14,16 @@ class Thumbnail extends React.Component {
       reviews: 37
     }
   };
+  componentWillReceiveProps(props) {
+    this.setState({ place: props.place });
+  }
   render() {
     return (
-      <Link className="card link" to={`/Place/${this.props.place._id}`}>
+      <>
         <div
           className="image"
           style={{
-            backgroundImage: `url(${this.props.place.image})`
+            backgroundImage: `url(${this.state.place.image})`
           }}
         >
           <button className="icon">
@@ -29,12 +32,12 @@ class Thumbnail extends React.Component {
         </div>
         <div className="content">
           <small className="meta">
-            {this.props.place.type.name} • {this.props.place.guests}{" "}
-            {this.props.place.guest === 1 ? "Guest" : "Guests"}
+            {this.state.place.type.name} • {this.state.place.guests}{" "}
+            {this.state.place.guest === 1 ? "Guest" : "Guests"}
           </small>
-          <h2>{this.props.place.title}</h2>
+          <h2>{this.state.place.title}</h2>
           <span className="price">
-            {"$" + this.props.place.price + "/night"}
+            {"$" + this.state.place.price + "/night"}
           </span>
           <span className="rating">
             <i className="fas fa-star"></i>
@@ -42,7 +45,7 @@ class Thumbnail extends React.Component {
             <i className="fas fa-star"></i>
             <i className="fas fa-star"></i>
             <i className="far fa-star"></i>
-            <span>{this.props.place.reviews} Reviews</span>
+            <span>{this.state.place.reviews} Reviews</span>
           </span>
         </div>
         {card =>
@@ -56,7 +59,7 @@ class Thumbnail extends React.Component {
             </div>
           ))
         }
-      </Link>
+      </>
     );
   }
 }

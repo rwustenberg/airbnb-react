@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 import Thumbnail from "./thumbnail";
 import Nav from "./nav";
 import Sidebar from "./sidebar";

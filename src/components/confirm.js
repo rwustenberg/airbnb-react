@@ -1,64 +1,83 @@
-import React from 'react'
-import Nav from './nav'
-import Thumbnail from './thumbnail'
-import {Link} from 'react-router-dom'
-
+import React from "react";
+import Nav from "./nav";
+import Thumbnail from "./thumbnail";
+import { Link } from "react-router-dom";
 
 class Confirm extends React.Component {
-	state = {
+  state = {
+    place: {
+      type: {
+        name: ""
+      },
+      amenities: [{ name: "", icon: "" }],
+      host: {
+        avatar: "",
+        name: ""
+      },
+      rating: 0,
+      reviews: [{ author: "", date: "" }],
+      image: []
+    },
+    dates: [],
+    guests: [],
 
-	}
-	render () {
-		return(
-			<>
-			<Nav />
-			<div class="grid medium">
-				<div class="grid sidebar-left">
-					<div class="sidebar">
-						<div class="card link">
-							<Thumbnail />
-						</div>
-					</div>
-			<div className="content">
-				<h2>Confirm Booking</h2>
-				<form>
-					<div className="group">
-						<label>From</label>
-						<input type="text" value="12/11/2019"/>
-					</div>
-					<div className="group">
-						<label>To</label>
-						<input type="text" value="15/11/2019"/>
-					</div>
-					<div className="group">
-						<label>Guests</label>
-						<select>
-							<option>1 guest</option>
-							<option>2 guests</option>
-							<option>3 guests</option>
-							<option selected>4 guests</option>
-							<option>5 guests</option>
-							<option>6 guests</option>
-							<option>7 guests</option>
-							<option>8 guests</option>
-							<option>9 guests</option>
-							<option>10 guests</option>
-						</select>
-					</div>
-					<div className="group">
-						<label>Total: 3 nights</label>
-						<h2>$1,050</h2>
-					</div>
-					<button className="primary">Confirm</button>
-				</form>
-				<hr/>
-				<button>Cancel</button>
-			</div>
-		</div>
-	</div>
-			</>
-		)
-	}
+    users: {
+      avatar: "",
+      name: "",
+      email: ""
+    }
+  };
+  componentWillMount() {
+    let dates = {
+      bookingStartDate: this.props.location.bookingStartDate,
+      bookingEndDate: this.props.location.bookingEndDate
+    };
+    let guests = this.props.location.guests;
+    this.setState(dates, guests);
+  }
+  render() {
+    return (
+      <>
+        <Nav />
+        <div class="grid medium">
+          <div class="grid sidebar-left">
+            <div class="sidebar">
+              <div class="card link">
+                <Thumbnail place={this.state.place} />
+              </div>
+            </div>
+            <div className="content">
+              <h2>Confirm Booking</h2>
+              <form>
+                <div className="group">
+                  <label>From</label>
+                  <input
+                    type="text"
+                    value={this.state.dates.bookingStartDate}
+                  />
+                </div>
+                <div className="group">
+                  <label>To</label>
+                  <input type="text" value={this.state.dates.bookingEndDate} />
+                </div>
+                <div className="group">
+                  <label>Guests</label>
+                  <select>{this.state.guests}</select>
+                </div>
+                <div className="group">
+                  <label>Total: 3 nights</label>
+                  <h2>$1,050</h2>
+                </div>
+                <button className="primary">Confirm</button>
+              </form>
+              <hr />
+              <button onClick={this.props.history.goBack()}>Cancel</button>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  }
 }
 
 export default Confirm;

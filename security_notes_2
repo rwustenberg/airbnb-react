@@ -1,0 +1,62 @@
+to add author by schema in  review.
+add user _id as empty string to state of user in place
+
+createReview = (e) => {
+e.preventDefault()
+let place = this.state.place
+axios.post('http://localhost400/reviews',
+	content: this.state.review_content,
+	rating: this.state.review_rating,
+	place: this.state.place._id,
+	author: this.state.user._id
+)}.then(res => {
+	let reviews = place.reviews
+	reviews.unshift(res.data)
+	this.setState({place})
+		place: place,
+		review_content: "",
+		review_rating: 0,
+		//use terniary operator to hide the div with review form. start with
+		boolean being false, on submit switch it to true
+})
+
+const Review = require("../models/review");
+const mongoose = require("mongoose");
+
+module.exports = (req, res) => {
+  console.log(req.body);
+  Review.create(req.body)
+		Review.findById(data._id).populate('author').then(review => {
+		res.send(review)
+		})
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.send(err);
+    });
+};
+
+//adding places to favourite gotoPlacePage
+
+in user schema add user array as empty string
+
+const mongoose = require("mongoose");
+
+const User = mongoose.model("user", {
+  avatar: {
+    type: String,
+    default: "https://randomuser.me/api/portraits/lego/1.jpg"
+  },
+  email: { type: String, required: "please provide email" },
+  location: { type: String, required: "Please provide location" },
+  name: { type: String, required: "Please enter Name" },
+  password: { type: String, select: false, required: "Please enter password" },
+	liked: []
+});
+
+module.exports = User;
+
+do a patch request update user with token find the id. find id of place to be added
+to favourites and add place id to favourotes list with teriary operator
+// don't send the id of user 
