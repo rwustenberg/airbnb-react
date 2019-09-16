@@ -20,7 +20,7 @@ class Places extends React.Component {
   componentWillMount() {
     //console.log("why won't I work");
     axios
-      .get("http://localhost:4000/places")
+      .get(`${process.env.REACT_APP_API}/places`)
       .then(res => {
         //console.log(res);
         this.setState({

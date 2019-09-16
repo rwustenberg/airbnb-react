@@ -1,7 +1,6 @@
 import React from "react";
 import Nav from "./nav";
 import Thumbnail from "./thumbnail";
-import { Link } from "react-router-dom";
 
 class Confirm extends React.Component {
   state = {

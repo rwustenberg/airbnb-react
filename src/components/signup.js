@@ -14,7 +14,7 @@ class Signup extends React.Component {
   signup = e => {
     e.preventDefault();
     axios
-      .post("http://localhost4000/signup", this.state.user)
+      .post(`${process.env.REACT_APP_MONGO}/signup`, this.state.user)
       .then(res => {
         localStorage.setItem("token", res.data);
         this.props.history.push({
@@ -75,9 +75,11 @@ class Signup extends React.Component {
                 <label>Profile Picture</label>
                 <input type="file" />
               </div>
-              <button className="primary">Signup</button>
+              <button className="primary" disabled="">
+                Signup
+              </button>
             </form>
-            Name
+
             <p clasNames="footer">
               Already have an account? <Link to="/login"> Login </Link>
             </p>
