@@ -1,6 +1,8 @@
 import React from "react";
 import Nav from "./nav";
 import Thumbnail from "./thumbnail";
+import StripeForm from "./Stripeform";
+import { Elements, StripeProvider } from "react-stripe-elements";
 
 class Confirm extends React.Component {
   state = {
@@ -38,10 +40,10 @@ class Confirm extends React.Component {
     return (
       <>
         <Nav />
-        <div class="grid medium">
-          <div class="grid sidebar-left">
-            <div class="sidebar">
-              <div class="card link">
+        <div className="grid medium">
+          <div className="grid sidebar-left">
+            <div className="sidebar">
+              <div className="card link">
                 <Thumbnail place={this.state.place} />
               </div>
             </div>
@@ -70,10 +72,20 @@ class Confirm extends React.Component {
                 <button className="primary">Confirm</button>
               </form>
               <hr />
-              <button onClick={this.props.history.goBack()}>Cancel</button>
+              <button onClick={this.props.history.goBack}>Cancel</button>
             </div>
           </div>
         </div>
+        <StripeProvider apiKey={process.env.REACT_APP_STRIPE_PK}>
+          <div className="stripe-form">
+            <Elements>
+              <StripeForm
+                amount={this.state.total}
+                description={this.state.place.title}
+              />
+            </Elements>
+          </div>
+        </StripeProvider>
       </>
     );
   }

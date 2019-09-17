@@ -86,7 +86,7 @@ class Place extends React.Component {
 
   componentWillMount() {
     axios
-      .get(`http://localhost:4000/place/${this.props.match.params.id}`)
+      .get(`${process.env.REACT_APP_MONGO}/place/${this.props.match.params.id}`)
       .then(res => {
         console.log(res.data);
         this.setState({

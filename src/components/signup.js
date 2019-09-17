@@ -13,17 +13,24 @@ class Signup extends React.Component {
   };
   signup = e => {
     e.preventDefault();
-    axios
-      .post(`${process.env.REACT_APP_MONGO}/signup`, this.state.user)
-      .then(res => {
-        localStorage.setItem("token", res.data);
-        this.props.history.push({
-          pathname: `/`
+    if (
+      this.state.user.name !== "" &&
+      this.state.user.email !== "" &&
+      this.state.user.password !== "" &&
+      this.state.user.location !== ""
+    ) {
+      axios
+        .post(`${process.env.REACT_APP_API}/signup`, this.state.user)
+        .then(res => {
+          localStorage.setItem("token", res.data);
+          this.props.history.push({
+            pathname: `/`
+          });
+        })
+        .catch(err => {
+          console.log(err);
         });
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    }
   };
 
   changeField = (e, field) => {
@@ -80,7 +87,7 @@ class Signup extends React.Component {
               </button>
             </form>
 
-            <p clasNames="footer">
+            <p className="footer">
               Already have an account? <Link to="/login"> Login </Link>
             </p>
           </div>
