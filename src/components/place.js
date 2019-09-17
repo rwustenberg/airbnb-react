@@ -8,6 +8,7 @@ import "react-datepicker/dist/react-datepicker.css";
 class Place extends React.Component {
   state = {
     place: {
+      guests: "",
       type: {
         name: ""
       },
@@ -70,6 +71,14 @@ class Place extends React.Component {
       searchTerm: e.target.value
     });
   };
+  sendData = () =>
+    this.props.history.push({
+      pathname: `/confirm`,
+      bookingStartDate: this.state.bookingStartDate,
+      bookingEndDate: this.state.bookingEndDate,
+      guests: this.state.guests,
+      place: this.state.place
+    });
 
   selectImage = i => {
     this.setState({
@@ -306,7 +315,7 @@ class Place extends React.Component {
                     <i className="far fa-star"></i>
                     <span>4 Reviews</span>
                   </small>
-                  <form className="small">
+                  <form className="small" onSubmit={this.sendData}>
                     <div className="group">
                       <label>Dates</label>
                       <DatePicker
@@ -333,16 +342,7 @@ class Place extends React.Component {
                       </select>
                     </div>
                     <div className="group">
-                      <button
-                        className="secondary full"
-                        onSubmit={this.props.history.push({
-                          pathname: `/confirm`,
-                          bookingStartDate: this.state.bookingStartDate,
-                          bookingEndDate: this.state.bookingEndDate,
-                          guests: this.state.guests,
-                          place: this.state.place
-                        })}
-                      >
+                      <button className="secondary full">
                         Book this place
                       </button>
                     </div>
